@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
-from my_app.models import Category, Contact, School, Town
+from my_app.models import Category, Contact, Place, City
 
 admin.site.unregister(Group)
 
@@ -13,21 +13,21 @@ class CategoryAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(Town)
-class TownAdmin(admin.ModelAdmin):
+@admin.register(City)
+class CityAdmin(admin.ModelAdmin):
 
-    list_display = ("name", "school_counts")
+    list_display = ("name", "place_counts")
 
-    def school_counts(self, instance):
-        return instance.town.count()
-    school_counts.short_description = "Количество школ"
+    def place_counts(self, instance):
+        return instance.city.count()
+    place_counts.short_description = "Количество школ"
 
 
-@admin.register(School)
-class SchoolAdmin(admin.ModelAdmin):
+@admin.register(Place)
+class PlaceAdmin(admin.ModelAdmin):
 
-    list_display = ("id", "title", "town", "address", "description", "my_categories")
-    list_filter = ("town", "address")
+    list_display = ("id", "title", "city", "address", "description", "my_categories")
+    list_filter = ("city", "address")
     search_fields = ("title", "address")
     list_display_links = ("id", "title")
     list_per_page = 10

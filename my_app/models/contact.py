@@ -7,7 +7,7 @@ class Contact(models.Model):
     additionalPhone = models.CharField("Дополнительный номер телефона", max_length=12)
     email = models.EmailField("Почта", max_length=50)
     working_mode = models.TextField("Режим работы")
-    school = models.OneToOneField("my_app.school", on_delete=models.CASCADE, related_name="contact")
+    place = models.OneToOneField("my_app.place", on_delete=models.CASCADE, related_name="contact")
     image = models.ImageField(upload_to="images/")
 
     class Meta:
@@ -15,4 +15,4 @@ class Contact(models.Model):
         verbose_name_plural = "Контакты"
 
     def __str__(self) -> str:
-        return f"Контакты {self.school}"
+        return f"Контакты {self.place}"

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from my_app.models import Category, Contact, School, Town
+from my_app.models import Category, Contact, Place, City
 
 
 class ContactSerializer(serializers.ModelSerializer):
@@ -25,18 +25,18 @@ class CategoryFullSerializer(serializers.ModelSerializer):
         return data["title"]
 
 
-class TownSerializer(serializers.ModelSerializer):
+class CitySerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Town
+        model = City
         fields = "__all__"
 
     def to_representation(self, instance, *args, **kwargs):
-        data = super(TownSerializer, self).to_representation(instance)
+        data = super(CitySerializer, self).to_representation(instance)
         return data["name"]
 
 
-class SchoolSerializer(serializers.ModelSerializer):
+class PlaceSerializer(serializers.ModelSerializer):
 
     email = serializers.CharField(source="contact.email")
     phone = serializers.CharField(source="contact.phone")
@@ -46,17 +46,17 @@ class SchoolSerializer(serializers.ModelSerializer):
 
     contact = ContactSerializer()
     categories = CategoryFullSerializer()
-    town = TownSerializer()
+    city = CitySerializer()
     
     class Meta:
-        model = School
+        model = Place
         fields = "__all__"
 
 
-class SchoolCreateSerializer(serializers.ModelSerializer):
+class PlaceCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = School
+        model = Place
         fields = "__all__"
 
     def create(self, validated_data):

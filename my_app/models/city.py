@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Town(models.Model):
+class City(models.Model):
 
     name = models.CharField("Название", max_length=50)
 

@@ -1,14 +1,14 @@
 from rest_framework.generics import ListAPIView
 
-from my_app.models import School
-from my_app.serializers import SchoolSerializer
+from my_app.models import Place
+from my_app.serializers import PlaceSerializer
 
 
-class SchoolByAddressSearch(ListAPIView):
-    serializer_class = SchoolSerializer
+class PlaceByAddressSearch(ListAPIView):
+    serializer_class = PlaceSerializer
 
     def get_queryset(self):
-        queryset = School.objects.all()
+        queryset = Place.objects.all()
         search_query = self.kwargs.get('address', None)
         if search_query is not None:
             queryset = queryset.filter(address__icontains=search_query)
